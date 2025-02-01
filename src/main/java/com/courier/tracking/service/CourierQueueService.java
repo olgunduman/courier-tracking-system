@@ -12,8 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Optional;
 import java.util.concurrent.*;
 
@@ -27,7 +25,7 @@ import static com.courier.tracking.utils.CalculationUtils.roundToTwoDecimalPlace
 public class CourierQueueService {
 
 
-    public BlockingQueue<CourierLocationRequest> locationQueue = new LinkedBlockingQueue<>(1000);
+    public BlockingQueue<CourierLocationRequest> locationQueue = new LinkedBlockingQueue<>(Integer.MAX_VALUE);
     public ExecutorService executorService;
     private final CourierLocationCommandProcessor commandProcessor;
 
