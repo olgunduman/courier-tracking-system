@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  courier-tracking:
+    build: .
+    ports:
+      - "8080:8080"
+    container_name: courier-tracking-app
+    restart: unless-stopped

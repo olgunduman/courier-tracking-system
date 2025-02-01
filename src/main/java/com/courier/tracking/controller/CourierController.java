@@ -1,40 +1,32 @@
-package com.courierTrackingSystem.spring_boot.controller;
+package com.courier.tracking.controller;
 
-import com.courierTrackingSystem.spring_boot.dto.courier.CourierLocationDTO;
-import com.courierTrackingSystem.spring_boot.service.CourierService;
+
+import com.courier.tracking.dto.CourierLocationRequest;
+import com.courier.tracking.dto.CourierResponse;
+import com.courier.tracking.service.CourierQueueService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/couriers")
 @RequiredArgsConstructor
+@Validated
+
 public class CourierController {
 
+    private final CourierQueueService courierQueueService;
 
-    private final CourierService courierService;
-
-    /**
-     * Kuryenin konumunu günceller.
-     *
-     * @param locationDTO CourierLocationDTO nesnesi
-     * @return Başarı mesajı
-     */
     @PostMapping("/location")
-    public ResponseEntity<String> updateLocation(@RequestBody CourierLocationDTO locationDTO) {
-        courierService.enqueueLocation(locationDTO);
-        return ResponseEntity.ok("Location enqueued for processing");
+    public ResponseEntity<String> updateLocation(@RequestBody @Valid CourierLocationRequest request) {
+        courierQueueService.enqueueLocation(request);
+        return ResponseEntity.ok("Location updated successfully.");
     }
 
-    /**
-     * Belirli bir kurye için toplam kat edilen mesafeyi döndürür.
-     *
-     * @param courierId Kurye ID'si
-     * @return Toplam mesafe (metre cinsinden)
-     */
     @GetMapping("/{courierId}/distance")
-    public ResponseEntity<Double> getTotalDistance(@PathVariable String courierId) {
-        Double distance = courierService.getTotalTravelDistance(courierId);
-        return ResponseEntity.ok(distance);
+    public CourierResponse getTotalDistance(@PathVariable String courierId) {
+        return courierQueueService.getTotalTravelDistance(courierId);
     }
 }

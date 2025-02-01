@@ -1,4 +1,7 @@
 package com.courier.tracking.dto;
 
-public record CouriterDto (String courierId,double ) {
+import lombok.Builder;
+
+@Builder
+public record CourierResponse(double totalMeters, double kilometers) {
 }

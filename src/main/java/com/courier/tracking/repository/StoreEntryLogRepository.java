@@ -1,6 +1,6 @@
-package com.courierTrackingSystem.spring_boot.repository;
+package com.courier.tracking.repository;
 
-import com.courierTrackingSystem.spring_boot.model.StoreEntryLog;
+import com.courier.tracking.model.StoreEntryLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

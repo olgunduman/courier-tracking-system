@@ -1,4 +1,5 @@
-package com.courierTrackingSystem.spring_boot.model;
+package com.courier.tracking.model;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,23 +10,22 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "couriers")
 public class Courier {
 
-    // Getters and Setters
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="courier_id", nullable = false, unique = true)
+    @Column(name = "courier_id", nullable = false, unique = true)
     private String courierId;
 
-    // Bir kurye birden fazla konum güncellemesine sahip olabilir
-    @OneToMany(mappedBy = "courier", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "courier", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<CourierLocation> locations;
 
+    @Column(name = "total_distance")
+    private double totalDistance;
 
-    public Courier(String courierId) {
-        this.courierId = courierId;
-    }
 }

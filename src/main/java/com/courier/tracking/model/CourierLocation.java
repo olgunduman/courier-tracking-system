@@ -1,11 +1,11 @@
-package com.courierTrackingSystem.spring_boot.model;
-
+package com.courier.tracking.model;
 
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -23,21 +23,13 @@ public class CourierLocation {
     @JoinColumn(name = "courier_id", nullable = false)
     private Courier courier;
 
-    @Column(name="timestamp", nullable = false)
+    @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
 
-    @Column(name="lat", nullable = false)
+    @Column(name = "lat", nullable = false)
     private double lat;
 
-    @Column(name="lng", nullable = false)
+    @Column(name = "lng", nullable = false)
     private double lng;
 
-
-    public CourierLocation(Courier courier, LocalDateTime timestamp, double lat, double lng) {
-        this.courier = courier;
-        this.timestamp = timestamp;
-        this.lat = lat;
-        this.lng = lng;
-
-    }
 }

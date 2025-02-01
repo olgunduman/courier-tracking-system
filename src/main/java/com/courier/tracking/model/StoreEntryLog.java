@@ -1,4 +1,4 @@
-package com.courierTrackingSystem.spring_boot.model;
+package com.courier.tracking.model;
 
 import jakarta.persistence.*;
 import lombok.*;
